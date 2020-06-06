@@ -1,19 +1,23 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(7, 8, 9, 10, 12, 13);
 
-const byte arraySize = 3;
-
 typedef struct  {
   String question;
   String choices[5];
   int correctAnswer;
 } questionGroup;
 
+//starting from here
+
+const byte arraySize = 3;
+
 questionGroup question[arraySize] = {
   {"what is ajdkshfjahsdjkf", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2},
   {"what is what", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2},
   {"what is hello", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2}
 };
+
+// to here replace the code with what the pthon file gives you
 
 bool answered = false;
 int questionNumber = -1;
