@@ -4,7 +4,7 @@ LiquidCrystal lcd(7, 8, 9, 10, 12, 13);
 const byte arraySize = 3;
 
 typedef struct  {
-  char question[];
+  String question;
   String choices[5];
   int correctAnswer;
 } questionGroup;
@@ -26,21 +26,23 @@ void setup() {
 }
 
 void loop() {
+  while (questionNumber != arraySize - 1) {
+    answered = false;
 
-  answered = false;
+    while (answered == false) {
+      // check if a option is selected, if so set answered to true so the loop breaks
+      delay(5000);
+      break;
+    }
+    questionNumber++;
+    printNextQuestion(questionNumber);
 
-  while (answered == false) {
-    // check if a option is selected, if so set answered to true so the loop breaks
-    delay(5000);
-    break;
   }
-  questionNumber++;
-  printNextQuestion(questionNumber);
-
+  lcd.clear();
+  lcd.write("you got a __ out of __");
+  delay(1000000);
 }
-
 void printNextQuestion(int index) {
   lcd.clear();
-  String currentQuestion = question[index].question;
-  
+  lcd.print(question[index].question);
 }
