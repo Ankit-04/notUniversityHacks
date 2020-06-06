@@ -1,7 +1,2 @@
-echo "# notUniversityHacks" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/Ankit-04/notUniversityHacks.git
-git push -u origin master
+README
                 
