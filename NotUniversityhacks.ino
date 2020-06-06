@@ -4,7 +4,7 @@ LiquidCrystal lcd(7, 8, 9, 10, 12, 13);
 const byte arraySize = 3;
 
 typedef struct  {
-  String question;
+  char question[];
   String choices[5];
   int correctAnswer;
 } questionGroup;
@@ -42,7 +42,5 @@ void loop() {
 void printNextQuestion(int index) {
   lcd.clear();
   String currentQuestion = question[index].question;
-  lcd.print(currentQuestion);
-
-
+  
 }
