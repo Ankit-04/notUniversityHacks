@@ -6,6 +6,7 @@ def main():
         'd\n':4,
         'e\n':5
     }
+    remove_list = [" a: ",' b: ',' c: ',' d: ','e: ']
     try:
         f = open("questions.txt","r")
         content = f.readlines()
@@ -14,8 +15,12 @@ def main():
         for i in range(number_of_questions):
             
             question_title = content[i*5 + 3 ]
-            question_options = content[i*5 + 5].split(' ')
-            question_answer = answer_to_letter.get(str(content[i*5 + 6]),)
+
+            for x in range(len(remove_list)):
+                print(x)
+                question_options = str(content[i*5 + 5]).replace(remove_list[x],'')
+
+            question_answer = str(answer_to_letter.get(str(content[i*5 + 6]),)).replace(' ','')
             
             print(question_title,question_options, question_answer)
             
