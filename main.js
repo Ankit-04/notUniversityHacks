@@ -21,11 +21,11 @@ function onSubmit() {
     }
  
     var choiceArray = []
-    choiceArray.push(document.getElementById('choice1').value);
-    choiceArray.push(document.getElementById('choice2').value);
-    choiceArray.push(document.getElementById('choice3').value);
-    choiceArray.push(document.getElementById('choice4').value);
-    choiceArray.push(document.getElementById('choice5').value);
+    choiceArray.push(`"${document.getElementById('choice1').value}"`);
+    choiceArray.push(`"${document.getElementById('choice2').value}"`);
+    choiceArray.push(`"${document.getElementById('choice3').value}"`);
+    choiceArray.push(`"${document.getElementById('choice4').value}"`);
+    choiceArray.push(`"${document.getElementById('choice5').value}"`);
  
     var question = new Question(document.getElementById('question').value, choiceArray, correctAnswer);
     allQuestions.push(question);
@@ -34,10 +34,11 @@ function onSubmit() {
  
 function convertQuestionToText(question) {
     var number = question.length;
-    var t = `Number of questions: ${number} <br><br>`
+    var t = ` const byte arraySize = ${number}; <br><br> questionGroup question[arraySize] = {<br>`
     question.forEach(element => {
-        t += `Question: ${element.question}<br> Choices: ${element.choices}<br> Answer: ${element.correctAnswer}<br>`
+        t += `<pre>     {"${element.question}", [${element.choices}], ${element.correctAnswer}}<br></pre>`
     });
+    t += `}`
     document.getElementById('textField').innerHTML = t;
 }
  
