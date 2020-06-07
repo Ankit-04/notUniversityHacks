@@ -5,12 +5,6 @@
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-//9716BE3F
-//3D9AE3F7
-//6182021B
-//8C22657B
-//488F3CBB
-
 const int buzzerPin = 6;
 const int blueLight = 7;
 const int greenLight = 8;
@@ -20,13 +14,13 @@ const int remoteLight = 13; //this is just a white led that flashes when remote 
 IRrecv irrecv(remotePin);
 decode_results results;
 
+const byte arraySize = 6;
+
 typedef struct  {
   String question;
   String choices[5];
   int correctAnswer;
 } questionGroup;
-
-const byte arraySize = 6;
 
 questionGroup question[arraySize] = {
   {"Cost of a single scantron paper?", {"15 cents", "20 cents", "25 cents", "30 cents", "35 cents"}, 5},
@@ -41,6 +35,7 @@ int questionNumber = 0;
 int choice;
 int answer;
 int numCorrect = 0;
+String realAnswer = "";
 
 void setup() {
   // put your setup code here, to run once:
@@ -72,22 +67,22 @@ void loop() {
 
       answer = question[questionNumber].correctAnswer;
 
-      if (results.value == 0x9716BE3F || results.value == 0x3D9AE3F7 || results.value == 0x6182021B || results.value == 0x8C22657B || results.value == 0x488F3CBB) {
+      if (results.value == 0xFF30CF || results.value == 0xFF18E7 || results.value == 0xFF7A85 || results.value == 0xFF10EF || results.value == 0xFF38C7) {
 
         switch (results.value) {
-          case 0x9716BE3F: //Keypad button "1"
+          case 0xFF30CF: //Keypad button "1"
             choice = 1;
             break;
-          case 0x3D9AE3F7: //Keypad button "2"
+          case 0xFF18E7: //Keypad button "2"
             choice = 2;
             break;
-          case 0x6182021B: //Keypad button "3"
+          case 0xFF7A85: //Keypad button "3"
             choice = 3;
             break;
-          case 0x8C22657B:
+          case 0xFF10EF:
             choice = 4;
             break;
-          case 0x488F3CBB:
+          case 0xFF38C7:
             choice = 5;
             break;
         }
@@ -102,6 +97,12 @@ void loop() {
           RGB_color(255, 0, 0);
           delay(500);
           RGB_color(0, 0, 0);
+          lcd.setCursor(0,0);
+          lcd.print("Correct answer: ");
+          lcd.setCursor(0,1);
+          realAnswer = question[questionNumber].choices[question[questionNumber].correctAnswer-1];
+          lcd.print(realAnswer);
+          delay(2000);
         }
         questionNumber++;
       }
@@ -150,6 +151,7 @@ void printNextQuestion(int index) {
   lcd.clear();
   String currentQuestion1 = question[index].question.substring(0, 16);
   String currentQuestion2 = question[index].question.substring(16);
+  lcd.setCursor(0,0);
   lcd.print(currentQuestion1);
   lcd.setCursor(0, 1);
   lcd.print(currentQuestion2);
@@ -165,5 +167,3 @@ void printNextQuestion(int index) {
   }
 
 }
-
-
