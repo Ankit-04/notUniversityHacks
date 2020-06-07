@@ -40,6 +40,6 @@ function convertQuestionToText(question) {
     });
     t += `}`
     document.getElementById('textField').innerHTML = t;
-}
+} 
  
  
