@@ -20,13 +20,13 @@ const int remoteLight = 13; //this is just a white led that flashes when remote 
 IRrecv irrecv(remotePin);
 decode_results results;
 
-const byte arraySize = 6;
-
 typedef struct  {
   String question;
   String choices[5];
   int correctAnswer;
 } questionGroup;
+
+const byte arraySize = 6;
 
 questionGroup question[arraySize] = {
   {"Cost of a single scantron paper?", {"15 cents", "20 cents", "25 cents", "30 cents", "35 cents"}, 5},
