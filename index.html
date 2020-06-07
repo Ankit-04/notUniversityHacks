@@ -1,43 +1,41 @@
 <!doctype html>
+ 
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-        <title>Scantron Sucks</title>
-      </head>
+ 
+<head>
+    <meta charset="utf-8">
+ 
+    <title>Scantrons Suck</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+ 
 <body>
-    <header>QUESTIONS TO CODE</header>
-
-    <div class="form">
-    <form id="form" class="topBefore">
-            
-        <input id="quesiton" type="text" placeholder="QUESTION">
-        <input id="choice 1" type="text" placeholder="CHOICE 1">
-        <input id="choice 1" type="text" placeholder="CHOICE 1">
-        <input id="choice 1" type="text" placeholder="CHOICE 1">
-        <input id="choice 1" type="text" placeholder="CHOICE 1">
-        <input id="choice 1" type="text" placeholder="CHOICE 1">
-        <input id="MESSAGE" type="text" placeholder="CORRECT ANSWER">
-        <input id="submit" type="submit" value="ADD QUESTION">
-      
-    </form>
+    <p class=title>Create A Test</p>
+    <div class="container">
+        <div class="form-style-5">
+            <form>
+                <legend><span class="number">1</span> Question</legend>
+                <input type="text" id="question" placeholder="Question">
+ 
+                <legend><span class="number">2</span> Choices</legend>
+                <input type="text" id="choice1" placeholder="Enter the choice here">
+                <input type="text" id="choice2" placeholder="Enter the choice here">
+                <input type="text" id="choice3" placeholder="Enter the choice here">
+                <input type="text" id="choice4" placeholder="Enter the choice here">
+                <input type="text" id="choice5" placeholder="Enter the choice here">
+ 
+ 
+                <legend><span class="number">3</span> Answer</legend>
+                <input type="number" min=1 max=5 maxlength=1 id="answer" placeholder="Answer (enter the choice number)">
+ 
+                <input type="button" value="Submit Question" onclick="onSubmit()" />
+            </form>
+        </div>
+        <div class="textField">
+            <p id = textField style="margin: 10px 10px" >Code will appear here!</p>
+        </div>
     </div>
-
-    <!-- form here with an onclick submit()-->
-    <!-- two buttons -->
-    <!-- Finish and Add Question -->
-    <!-- Add = back to form but clear -->
-    <!-- Text box on the side with prepared arduino text   -->
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+ 
 </html>
