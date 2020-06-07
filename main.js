@@ -36,7 +36,7 @@ function convertQuestionToText(question) {
     var number = question.length;
     var t = ` const byte arraySize = ${number}; <br><br> questionGroup question[arraySize] = {<br>`
     question.forEach(element => {
-        t += `<pre>     {"${element.question}", [${element.choices}], ${element.correctAnswer}}<br></pre>`
+        t += `<pre>     {"${element.question}", [${element.choices}], ${element.correctAnswer -1 }}<br></pre>`
     });
     t += `}`
     document.getElementById('textField').innerHTML = t;
