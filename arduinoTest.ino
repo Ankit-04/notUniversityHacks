@@ -1,4 +1,3 @@
-
 #include <LiquidCrystal.h>
 #include <IRremote.h>
 #include <TimerFreeTone.h>
@@ -21,7 +20,7 @@ const int remoteLight = 13; //this is just a white led that flashes when remote 
 IRrecv irrecv(remotePin);
 decode_results results;
 
-const byte arraySize = 3;
+const byte arraySize = 6;
 
 typedef struct  {
   String question;
@@ -30,14 +29,18 @@ typedef struct  {
 } questionGroup;
 
 questionGroup question[arraySize] = {
-  {"what is ajdkshfjahsdjkf", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2},
-  {"what is what", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2},
-  {"what is hello", {"AHSKJDF", "FDJKG", "SFDHGKJ", "HGFJHF", "DJFHGKJDH"}, 2}
+  {"Cost of a single scantron paper?", {"15 cents", "20 cents", "25 cents", "30 cents", "35 cents"}, 5},
+  {"What is the smallest country?", {"San Marino", "Luxembourg", "Chad", "Vatican City", "New Zealand"}, 4},
+  {"What is the biggest island?", {"Greenland", "New Guinea", "Borneo", "Madagascar", "Java"}, 1},
+  {"Where is the MLH headquarters?", {"Detroit", "New York", "Washington", "Philadelphia", "Chicago"}, 2},
+  {"Who is the inventor of Bluetooth?", {"Jaap Hartsen", "Charle Babbage", "Graham Daniel", "Hedy Lamarr", "Ben Franklin"}, 1},
+  {"What year was MLH founded?", {"2011", "2012", "2013", "2014", "2015"}, 3}
 };
 
 int questionNumber = 0;
 int choice;
 int answer;
+int numCorrect = 0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -55,16 +58,10 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  // RGB_color(255, 0, 0); // Red
-  // delay(1000);
-  // RGB_color(0, 255, 0); // Green
-  // delay(1000);
 
   while (questionNumber < arraySize) {
 
     printNextQuestion(questionNumber);
-    delay(1000);
     if (irrecv.decode(&results)) {
 
       TimerFreeTone(buzzerPin, 300, 100);
@@ -99,6 +96,8 @@ void loop() {
           RGB_color(0, 255, 0);
           delay(500);
           RGB_color(0, 0, 0);
+          numCorrect++;
+          
         } else {
           RGB_color(255, 0, 0);
           delay(500);
@@ -111,6 +110,31 @@ void loop() {
     }
 
   }
+lcd.clear();
+String congrats1 = "Congrats! You";
+String congrats2 = "got "+ String(numCorrect)+"/"+String(arraySize)+" correct!";
+lcd.print(congrats1);
+lcd.setCursor(0,1);
+lcd.print(congrats2);
+
+RGB_color(255, 0, 0);
+delay(200);
+RGB_color(255, 153, 51);
+delay(200);
+RGB_color(255, 255, 0);
+delay(200);
+RGB_color(0, 255, 0);
+delay(200);
+RGB_color(0, 255, 255);
+delay(200);
+RGB_color(0, 255, 0);
+delay(200);
+RGB_color(0, 0, 255);
+delay(200);
+RGB_color(127, 0, 255);
+delay(200);
+RGB_color(255, 0, 255);
+delay(200);
 
 }
 
@@ -122,9 +146,24 @@ void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
 }
 
 void printNextQuestion(int index) {
+  int counter = 0;
   lcd.clear();
-  String currentQuestion = question[index].question;
-  lcd.print(currentQuestion);
+  String currentQuestion1 = question[index].question.substring(0, 16);
+  String currentQuestion2 = question[index].question.substring(16);
+  lcd.print(currentQuestion1);
+  lcd.setCursor(0, 1);
+  lcd.print(currentQuestion2);
+  delay(2000);
 
+  while (counter < 5 && !irrecv.decode(&results)) {
+    String possibilities = String(counter + 1) + ". " + question[index].choices[counter];
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(possibilities);
+    delay(2000);
+    counter++;
+  }
 
 }
+
+
